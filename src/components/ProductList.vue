@@ -14,16 +14,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'ProductList',
   props: {
     msg: String
   },
-  computed:{
-    products(){
-      return this.$store.state.products;
-    }
-  },
+  computed: mapState(['products']),
   created(){
     this.$store.dispatch('getAllProducts')
   }
