@@ -14,19 +14,18 @@
 </template>
 
 <script>
-import shop from '@/api/shop.js'
 export default {
   name: 'ProductList',
   props: {
     msg: String
   },
-  data(){
-    return {
-      products : [],
+  computed:{
+    products(){
+      return this.$store.state.products;
     }
   },
   created(){
-    shop.getProducts( products => this.products = products);
+    this.$store.dispatch('getAllProducts')
   }
 }
 </script>
