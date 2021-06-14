@@ -20,6 +20,10 @@ export default new Vuex.Store({
         quantity: 1
       })
     },
+    incrementItemQuantity(state,{id}){
+      const carItem=state.items.find(item => item.id === id);
+      carItem.quantity++;
+    }
   },
   actions: {
     getAllProducts({commit}){
@@ -27,8 +31,13 @@ export default new Vuex.Store({
         commit('setProducts', products);
       })
     },
-    addProductToCart({commit},product){
-      commit('pushProductToCart', product)
+    addProductToCart({state,commit},product){
+      const carItem = state.items.find(item => item.id === product.id);
+      if(!cartItem){
+        commit('pushProductToCart',product)
+      }else{
+        commit('incrementItemQuantity', carItem);
+      }
     }
   },
   modules: {
