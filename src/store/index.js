@@ -23,6 +23,10 @@ export default new Vuex.Store({
     incrementItemQuantity(state,{id}){
       const carItem=state.items.find(item => item.id === id);
       carItem.quantity++;
+    },
+    decrementProductIventory(state,{id}){
+      const product = state.products.find(product => product.id === id)
+      product.inventory--;
     }
   },
   actions: {
@@ -38,6 +42,7 @@ export default new Vuex.Store({
       }else{
         commit('incrementItemQuantity', carItem);
       }
+      commit('decrementProductIventory',product)
     }
   },
   modules: {
